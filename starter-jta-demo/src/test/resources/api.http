@@ -1,0 +1,20 @@
+### 修改班级
+POST localhost:8080/jta/tclass/saveOrUpdateTClass
+Content-Type: application/x-www-form-urlencoded
+
+id=1&name=一班
+
+### 删除班级
+POST localhost:8080/jta/tclass/deleteTClass?id=1
+
+### 新增老师
+POST localhost:8080/jta/teacher/saveOrUpdateTeacher
+Content-Type: application/x-www-form-urlencoded
+
+name=王五
+
+### 分布式事务测试-成功
+POST localhost:8080/jta/jtaTest/test
+
+### 分布式事务测试-失败
+POST localhost:8080/jta/jtaTest/test01

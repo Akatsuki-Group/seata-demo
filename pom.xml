@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>jta-demo</module>
+        <module>starter-jta-demo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

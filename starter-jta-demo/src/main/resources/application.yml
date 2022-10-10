@@ -1,0 +1,124 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 30m
+    context-path: /jta
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.xa.DruidXADataSource
+    druid:
+      systemDB:
+        name: systemDB
+        url: jdbc:mysql://124.71.38.83:3306/jta?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: tt19950826TT.
+        # 下面为连接池的补充设置，应用到上面所有数据源中
+        # 初始化大小，最小，最大
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 30
+        validationQuery: SELECT 1
+        validationQueryTimeout: 10000
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        # 合并多个DruidDataSource的监控数据
+        useGlobalDataSourceStat: true
+
+      businessDB:
+        name: businessDB
+
+        url: jdbc:mysql://124.71.38.83:3306/jta1?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: tt19950826TT.
+        # 下面为连接池的补充设置，应用到上面所有数据源中
+        # 初始化大小，最小，最大
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 30
+        validationQuery: SELECT 1
+        validationQueryTimeout: 10000
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        #配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        # 合并多个DruidDataSource的监控数据
+        useGlobalDataSourceStat: true
+  #jta相关参数配置
+  jta:
+    log-dir: classpath:tx-logs
+    transaction-manager-id: txManager
+  resources:
+    static-locations:
+      - classpath:/META-INF/resources/
+      - classpath:/resources/
+      - classpath:/static/
+      - classpath:/public/
+  #freemarker配置
+  freemarker:
+    allow-request-override: false
+    cache: false
+    settings:
+      template_update_delay: 0
+      auto_import: common/common.ftl as spring
+      date_format: yyyy-MM-dd
+      #传统兼容模式
+      classic_compatible: true
+
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    prefix:
+    #若在freemarker获取request对象，在spring boot 在application.properties可以这么配置
+    request-context-attribute: request
+    suffix: .ftl
+    #template-loader-path表示所有的模板文件都放在该目录下
+    template-loader-path: classpath:/templates/
+  mvc:
+    #表示访问该路径时代表请求静态资源，用户可以直接访问该请求路径中的静态资源
+    static-path-pattern: /static/**
+
+#mybatis配置
+mybatis:
+  type-aliases-package: org.example.jta.entity
+  mapper-locations: classpath:mapper/*.xml
+#通用mapper配置
+mapper:
+  mappers: org.example.jta.mappers.MyMapper
+  not-empty: false
+  identity: MYSQL
+#pagehelper配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
