@@ -66,3 +66,9 @@ spring:
     log-dir: classpath:tx-logs
     transaction-manager-id: txManager
 #    bitronix： #还可以配置bitronix的配置，此处省略，有兴趣的可以继续
+
+logging:
+  level:
+    org.springframework: debug
+    bitronix.tm: debug
+

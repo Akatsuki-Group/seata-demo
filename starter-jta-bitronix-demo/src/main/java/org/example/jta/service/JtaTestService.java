@@ -5,6 +5,7 @@ import org.example.jta.entity.TStock;
 import org.example.jta.order.service.OrderService;
 import org.example.jta.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,9 @@ public class JtaTestService {
     @Autowired
     private StockService stockService;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Transactional(rollbackFor = Exception.class)
     public Map<String,Object> test(){
         TOrder order = new TOrder();
@@ -41,7 +45,7 @@ public class JtaTestService {
         return resultMap;
     }
 
-    @Transactional(transactionManager = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor = { RuntimeException.class })
+    @Transactional(transactionManager = "tm", propagation = Propagation.REQUIRED, rollbackFor = { RuntimeException.class })
     public Map<String,Object> test01(){
         TOrder order = new TOrder();
         order.setId(UUID.randomUUID().toString());
@@ -60,6 +64,7 @@ public class JtaTestService {
         return resultMap;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public Map<String, Object> test02() {
 
         TOrder order = new TOrder();

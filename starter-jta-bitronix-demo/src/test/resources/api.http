@@ -21,3 +21,6 @@ POST http://localhost:8080/jta/test
 
 ### 分布式事务-失败样例
 POST http://localhost:8080/jta/test01
+
+### 分布式事务-失败样例
+POST http://localhost:8080/jta/test02

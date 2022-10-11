@@ -50,10 +50,10 @@ public class BitronixDataSourceConfig {
      * 注入事物管理器
      * @return
      */
-    @Bean(name = "transactionManager")
+    @Bean(name = "tm")
     public PlatformTransactionManager transactionManager () {
     	BitronixTransactionManager transactionManager = TransactionManagerServices.getTransactionManager();
         return new JtaTransactionManager(transactionManager,transactionManager);
-    } 
+    }
 }
 
