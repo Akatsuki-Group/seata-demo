@@ -1,0 +1,23 @@
+### 新增订单
+POST http://localhost:8080/order/insert
+content-type: application/json
+
+{
+  "id": 1,
+  "name": "order1"
+}
+
+### 新增库存
+POST http://localhost:8080/stock/insert
+content-type: application/json
+
+{
+  "id": 1,
+  "name": "stock1"
+}
+
+### 分布式事务-成功样例
+POST http://localhost:8080/jta/test
+
+### 分布式事务-失败样例
+POST http://localhost:8080/jta/test01

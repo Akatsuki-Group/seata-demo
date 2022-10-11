@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package org.example.jta.service.impl;
+package org.example.jta.order.service.impl;
 
 import org.example.jta.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
