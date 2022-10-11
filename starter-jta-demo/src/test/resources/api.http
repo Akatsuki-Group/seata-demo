@@ -16,5 +16,5 @@ name=王五
 ### 分布式事务测试-成功
 POST localhost:8080/jta/jtaTest/test
 
-### 分布式事务测试-失败   
+### 分布式事务测试-失败
 POST localhost:8080/jta/jtaTest/test01
